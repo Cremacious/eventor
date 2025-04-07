@@ -61,44 +61,44 @@ const QuickCreateForm = () => {
           <AlertDialogTitle className="text-center">
             Let&apos;s create a new event!
           </AlertDialogTitle>
-          <AlertDialogDescription>
-            <form
-              className="space-y-4"
-              method="Post"
-              onSubmit={form.handleSubmit(onSubmit)}
-            >
-              <Input
-                placeholder="Event Name"
-                {...form.register('name')}
-                className="w-full"
-              />
-              <Input
-                placeholder="Description"
-                {...form.register('description')}
-                className="w-full"
-              />
-              <Input
-                placeholder="Type"
-                {...form.register('type')}
-                className="w-full"
-              />
-              <Input
-                placeholder="Date"
-                {...form.register('date')}
-                className="w-full"
-              />
-              <Input
-                placeholder="Visibility"
-                {...form.register('visibility')}
-                className="w-full"
-              />
-              <Button variant="destructive" type="submit">
-                Create Event
-              </Button>
-            </form>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction>Continue</AlertDialogAction>
-          </AlertDialogDescription>
+          {/* <AlertDialogDescription> */}
+          <form
+            className="space-y-4"
+            method="Post"
+            onSubmit={form.handleSubmit(onSubmit)}
+          >
+            <Input
+              placeholder="Event Name"
+              {...form.register('name')}
+              className="w-full"
+            />
+            <Input
+              placeholder="Description"
+              {...form.register('description')}
+              className="w-full"
+            />
+            <Input
+              placeholder="Type"
+              {...form.register('type')}
+              className="w-full"
+            />
+            <Input
+              placeholder="Date"
+              {...form.register('date')}
+              className="w-full"
+            />
+            <Input
+              placeholder="Visibility"
+              {...form.register('visibility')}
+              className="w-full"
+            />
+            <Button variant="destructive" type="submit">
+              Create Event
+            </Button>
+          </form>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction>Continue</AlertDialogAction>
+          {/* </AlertDialogDescription> */}
         </AlertDialogHeader>
       </AlertDialogContent>
     </AlertDialog>

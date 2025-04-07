@@ -7,7 +7,7 @@ import { UserButton } from '@clerk/nextjs';
 import { checkUser } from '@/lib/actions/user.actions';
 
 const SidebarUser = async () => {
-  const user = await currentUser();
+  // const user = await currentUser();
   const session = await checkUser();
 
   return (
@@ -19,7 +19,8 @@ const SidebarUser = async () => {
         <div className=" flex flex-row">
           <UserButton />
           <div className="ml-2 grid flex-1 text-left text-sm text-slate-800">
-            <span className="truncate font-medium">{user?.firstName}</span>
+            <span className="truncate font-medium">{session?.name}</span>
+            <span className="truncate text-sm">{session?.email}</span>
           </div>
           <Link
             href="/dashboard/settings"
