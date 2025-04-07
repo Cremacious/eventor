@@ -3,10 +3,12 @@ import { SidebarMenu, SidebarMenuItem } from '@/components/ui/sidebar';
 import Link from 'next/link';
 import { Settings } from 'lucide-react';
 import { UserButton } from '@clerk/nextjs';
+import { checkUser } from '@/lib/actions/user.actions';
 import { currentUser } from '@clerk/nextjs/server';
 
 const SidebarUser = async () => {
   const user = await currentUser();
+  const session = await checkUser()
 
   return (
     <SidebarMenu

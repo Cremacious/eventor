@@ -3,9 +3,11 @@ import { db } from '@/lib/db';
 
 export const checkUser = async () => {
   const user = await currentUser();
+  console.log('User:', user);
 
   // Check for current logged in clerk user
   if (!user) {
+    console.log('No user found');
     return null;
   }
 
@@ -18,6 +20,7 @@ export const checkUser = async () => {
 
   // If user is in database, return user
   if (loggedInUser) {
+    console.log('user in database');
     return loggedInUser;
   }
 
