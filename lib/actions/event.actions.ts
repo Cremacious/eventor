@@ -11,16 +11,13 @@ import { z } from 'zod';
 export async function createEvent(data: z.infer<typeof insertEventSchema>) {
   try {
     const user = await auth();
-    console.log('event user here', user);
-    const session = await currentUser();
-    if (!session) {
+    if (!user) {
       throw new Error('User not authenticated');
     }
-    const userId = session?.id;
-    console.log('event userId', userId);
+    const userId = user.userId;
     const dbUser = await db.user.findUnique({
       where: {
-        clerkUserId: userId,
+        clerkUserId: userId ?? undefined,
       },
     });
     if (!dbUser) {
@@ -31,7 +28,7 @@ export async function createEvent(data: z.infer<typeof insertEventSchema>) {
     await db.event.create({
       data: {
         ...event,
-        userId: dbUser.id,
+        userId: dbUser.clerkUserId,
       },
     });
     return {
@@ -39,7 +36,6 @@ export async function createEvent(data: z.infer<typeof insertEventSchema>) {
       message: `Event ${event.name} created successfully`,
     };
   } catch (error) {
-    console.error('Error in createEvent:', error);
     return {
       success: false,
       message: formatError(error),
