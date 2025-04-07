@@ -1,5 +1,7 @@
 'use server';
 
+import { User } from 'lucide-react';
+import { auth } from '@clerk/nextjs/server';
 import { currentUser } from '@clerk/nextjs/server';
 import { db } from '@/lib/db';
 import { formatError } from '../utils';
@@ -8,16 +10,19 @@ import { z } from 'zod';
 
 export async function createEvent(data: z.infer<typeof insertEventSchema>) {
   try {
+    const user = await auth();
+    console.log('event user here', user);
     const session = await currentUser();
     if (!session) {
       throw new Error('User not authenticated');
     }
-    const userId = session?.id
+    const userId = session?.id;
+    console.log('event userId', userId);
     const dbUser = await db.user.findUnique({
-        where: {
-          clerkUserId: userId,
-        },
-      });
+      where: {
+        clerkUserId: userId,
+      },
+    });
     if (!dbUser) {
       throw new Error('User not found in the database.');
     }
