@@ -5,6 +5,7 @@ import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 
 import { AppSidebar } from '@/components/shared/sidebar/app-sidebar';
 import { SiteHeader } from '@/components/shared/sidebar/sidebar-header';
+import { ThemeProvider } from 'next-themes';
 
 // import { ThemeProvider } from '@/components/theme-provider';
 
@@ -28,6 +29,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+              <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
         <SidebarProvider
           style={
             {
@@ -49,6 +56,7 @@ export default function RootLayout({
             </div>
           </SidebarInset>
         </SidebarProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
