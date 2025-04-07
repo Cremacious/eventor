@@ -1,4 +1,3 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -9,11 +8,12 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { Input } from '@/components/ui/input';
-// import { createEvent } from '@/lib/actions/event.actions';
+import { createEvent } from '@/lib/actions/event.actions';
 import flaskImage from '@/public/images/icons/flask-bubble.png';
 import { insertEventSchema } from '@/lib/validators';
 import { toast } from 'sonner';
@@ -31,13 +31,13 @@ const QuickCreateForm = () => {
     data
   ) => {
     console.log(data);
-    // const response = await createEvent(data);
-    // if (response.success) {
-    //   setOpen(false);
-    //   toast.success(response.message);
-    // } else {
-    //   toast.error(response.message);
-    // }
+    const response = await createEvent(data);
+    if (response.success) {
+      setOpen(false);
+      toast.success(response.message);
+    } else {
+      toast.error(response.message);
+    }
   };
 
   return (

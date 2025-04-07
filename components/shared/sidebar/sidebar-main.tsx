@@ -10,6 +10,7 @@ import {
 
 import { LayoutDashboard } from 'lucide-react';
 import Link from 'next/link';
+import QuickCreateForm from '../events/quick-create-form';
 // import QuickCreateForm from './shared/events/quick-create-form';
 import { useSidebar } from '@/components/ui/sidebar';
 
@@ -20,7 +21,7 @@ const SidebarMain = () => {
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
           <SidebarMenuItem className="flex items-center gap-2">
-            <SidebarMenuButton>{/* <QuickCreateForm /> */}</SidebarMenuButton>
+            <SidebarMenuButton><QuickCreateForm /></SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
         <SidebarMenu>
