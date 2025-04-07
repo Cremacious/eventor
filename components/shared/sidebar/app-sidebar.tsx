@@ -15,8 +15,7 @@ import Link from 'next/link';
 import SidebarEvents from './sidebar-events';
 import SidebarMain from './sidebar-main';
 import SidebarUser from './sidebar-user';
-
-// import logo from '@/public/logo.png';
+import logo from '@/public/logo.png'
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -29,12 +28,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
               <Link href="#">
-                {/* <Image
+                <Image
                   src={logo}
                   className="object-contain"
                   fill
                   alt="Eventor"
-                /> */}
+                />
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
