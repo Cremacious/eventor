@@ -2,10 +2,12 @@ import { SidebarMenu, SidebarMenuItem } from '@/components/ui/sidebar';
 
 import Link from 'next/link';
 import { Settings } from 'lucide-react';
-
-// import UserButton from './user-button';
+import { UserButton } from '@clerk/nextjs';
+import { currentUser } from '@clerk/nextjs/server';
 
 const SidebarUser = async () => {
+  const user = await currentUser();
+
   return (
     <SidebarMenu
       className="backgroundCyan
@@ -13,10 +15,9 @@ const SidebarUser = async () => {
     >
       <SidebarMenuItem>
         <div className=" flex flex-row">
-          {/* <UserButton /> */}
+          <UserButton />
           <div className="ml-2 grid flex-1 text-left text-sm text-slate-800">
-            <span className="truncate font-medium">name</span>
-            <span className="text-slate-800 truncate text-xs">email</span>
+            <span className="truncate font-medium">{user?.firstName}</span>
           </div>
           <Link
             href="/dashboard/settings"
@@ -29,6 +30,6 @@ const SidebarUser = async () => {
       </SidebarMenuItem>
     </SidebarMenu>
   );
-}
+};
 
 export default SidebarUser;
