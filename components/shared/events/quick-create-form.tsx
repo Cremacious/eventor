@@ -8,6 +8,13 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
@@ -82,14 +89,27 @@ const QuickCreateForm = () => {
               {...form.register('type')}
               className="w-full"
             />
+            {/* <Input
+              placeholder="Visibility"
+              {...form.register('visibility')}
+              className="w-full"
+            /> */}
+            <Select
+              onValueChange={(value) => form.setValue('visibility', value)}
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select Visibility" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="public">Public (Default)</SelectItem>
+                <SelectItem value="friends-only">Friends Only</SelectItem>
+                <SelectItem value="private">Private</SelectItem>
+              </SelectContent>
+            </Select>
+
             <Input
               placeholder="Date"
               {...form.register('date')}
-              className="w-full"
-            />
-            <Input
-              placeholder="Visibility"
-              {...form.register('visibility')}
               className="w-full"
             />
             <Button variant="destructive" type="submit">
