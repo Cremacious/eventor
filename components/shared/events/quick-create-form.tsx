@@ -40,8 +40,9 @@ const QuickCreateForm = () => {
     console.log(data);
     const response = await createEvent(data);
     if (response.success) {
-      setOpen(false);
+      form.reset();
       toast.success(response.message);
+      setOpen(false);
     } else {
       toast.error(response.message);
     }
@@ -68,7 +69,6 @@ const QuickCreateForm = () => {
           <AlertDialogTitle className="text-center">
             Let&apos;s create a new event!
           </AlertDialogTitle>
-          {/* <AlertDialogDescription> */}
           <form
             className="space-y-4"
             method="Post"
@@ -78,6 +78,7 @@ const QuickCreateForm = () => {
               placeholder="Event Name"
               {...form.register('name')}
               className="w-full"
+              defaultValue=""
             />
             <Input
               placeholder="Description"
@@ -89,11 +90,7 @@ const QuickCreateForm = () => {
               {...form.register('type')}
               className="w-full"
             />
-            {/* <Input
-              placeholder="Visibility"
-              {...form.register('visibility')}
-              className="w-full"
-            /> */}
+
             <Select
               onValueChange={(value) => form.setValue('visibility', value)}
             >
@@ -101,9 +98,9 @@ const QuickCreateForm = () => {
                 <SelectValue placeholder="Select Visibility" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="public">Public (Default)</SelectItem>
+                <SelectItem value="private">Private (Default)</SelectItem>
+                <SelectItem value="public">Public</SelectItem>
                 <SelectItem value="friends-only">Friends Only</SelectItem>
-                <SelectItem value="private">Private</SelectItem>
               </SelectContent>
             </Select>
 
@@ -118,7 +115,6 @@ const QuickCreateForm = () => {
           </form>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction>Continue</AlertDialogAction>
-          {/* </AlertDialogDescription> */}
         </AlertDialogHeader>
       </AlertDialogContent>
     </AlertDialog>

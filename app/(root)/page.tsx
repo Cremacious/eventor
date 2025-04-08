@@ -39,7 +39,6 @@ const Homepage = () => {
             />
           </div>
         </div>
-
         <div className="backgroundGray flex mt-4 max-lg:flex-col px-4 py-8 gap-12 max-w-[1400px] mx-auto">
           <div>
             <h2 className="text-white text-4xl font-bold mb-6">
