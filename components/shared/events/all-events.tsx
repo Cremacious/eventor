@@ -8,7 +8,7 @@ const AllEventsCard = async () => {
   const events = await getAllUserEvents();
   return (
     <>
-      <div className="p-8 rounded-2xl shadow-lg">
+      <div className="backgroundCyan p-8 rounded-2xl shadow-lg">
         <div className="text-center mb-6 font-bold text-lg">
           Your Recent Events
         </div>

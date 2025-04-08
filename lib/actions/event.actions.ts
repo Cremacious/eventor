@@ -32,6 +32,7 @@ export async function createEvent(data: z.infer<typeof insertEventSchema>) {
         userId: dbUser.clerkUserId,
       },
     });
+    revalidatePath('/dashboard');
     return {
       success: true,
       message: `Event ${event.name} created successfully`,
@@ -65,7 +66,6 @@ export async function getAllUserEvents() {
         userId: dbUser.clerkUserId,
       },
     });
-    // revalidatePath('/dashboard');
     return events;
   } catch (error) {
     return [];
