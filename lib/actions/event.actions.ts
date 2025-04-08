@@ -6,6 +6,7 @@ import { currentUser } from '@clerk/nextjs/server';
 import { db } from '@/lib/db';
 import { formatError } from '../utils';
 import { insertEventSchema } from '../validators';
+import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
 
 export async function createEvent(data: z.infer<typeof insertEventSchema>) {
@@ -43,30 +44,30 @@ export async function createEvent(data: z.infer<typeof insertEventSchema>) {
   }
 }
 
-// export async function getAllUserEvents() {
-//   try {
-//     const session = await auth();
-//     if (!session) {
-//       throw new Error('User not authenticated');
-//     }
-//     const userId = session?.user?.id;
-//     const dbUser = await prisma.user.findUnique({
-//       where: {
-//         id: userId,
-//       },
-//     });
-//     if (!dbUser) {
-//       throw new Error('User not found in the database.');
-//     }
+export async function getAllUserEvents() {
+  try {
+    const session = await auth();
+    if (!session) {
+      throw new Error('User not authenticated');
+    }
+    const userId = session?.userId;
+    const dbUser = await db.user.findUnique({
+      where: {
+        clerkUserId: userId ?? undefined,
+      },
+    });
+    if (!dbUser) {
+      throw new Error('User not found in the database.');
+    }
 
-//     const events = await prisma.event.findMany({
-//       where: {
-//         userId: dbUser.id,
-//       },
-//     });
-//     return events;
-//   } catch (error) {
-//     console.error('Error in getAllUserEvents:', error);
-//     return []
-//   }
-// }
+    const events = await db.event.findMany({
+      where: {
+        userId: dbUser.clerkUserId,
+      },
+    });
+    // revalidatePath('/dashboard');
+    return events;
+  } catch (error) {
+    return [];
+  }
+}
