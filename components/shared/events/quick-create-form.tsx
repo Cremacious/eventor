@@ -1,3 +1,5 @@
+'use client';
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -9,6 +11,11 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -18,10 +25,14 @@ import {
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import { Calendar as CalendarIcon } from 'lucide-react';
 import Image from 'next/image';
 import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
 import { createEvent } from '@/lib/actions/event.actions';
 import flaskImage from '@/public/images/icons/flask-bubble.png';
+import { format } from 'date-fns';
 import { insertEventSchema } from '@/lib/validators';
 import { toast } from 'sonner';
 import { useState } from 'react';
@@ -29,6 +40,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const QuickCreateForm = () => {
+  const [date, setDate] = useState<Date>();
   const [open, setOpen] = useState(false);
   const form = useForm<z.infer<typeof insertEventSchema>>({
     resolver: zodResolver(insertEventSchema),
@@ -38,6 +50,7 @@ const QuickCreateForm = () => {
     data
   ) => {
     console.log(data);
+
     const response = await createEvent(data);
     if (response.success) {
       form.reset();
@@ -103,12 +116,41 @@ const QuickCreateForm = () => {
                 <SelectItem value="friends-only">Friends Only</SelectItem>
               </SelectContent>
             </Select>
-
-            <Input
-              placeholder="Date"
-              {...form.register('date')}
-              className="w-full"
-            />
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant={'outline'}
+                  className={cn(
+                    'w-[280px] justify-start text-left font-normal',
+                    !form.watch('date') && 'text-muted-foreground'
+                  )}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {form.watch('date') ? (
+                    form.watch('date')
+                  ) : (
+                    <span>Pick a date</span>
+                  )}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0 pointer-events-auto">
+                <Calendar
+                  mode="single"
+                  selected={
+                    form.watch('date')
+                      ? new Date(form.watch('date'))
+                      : undefined
+                  }
+                  onSelect={(selectedDate) => {
+                    if (selectedDate) {
+                      const formattedDate = format(selectedDate, 'MM-dd-yyyy');
+                      form.setValue('date', formattedDate);
+                    }
+                  }}
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
             <Button variant="destructive" type="submit">
               Create Event
             </Button>
