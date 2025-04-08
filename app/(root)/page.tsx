@@ -8,7 +8,7 @@ import screenshot from '@/public/images/screenshot.png';
 const Homepage = () => {
   return (
     <>
-      <header className="flex shadow-lg py-4 px-4 sm:px-10 backgroundGray min-h-[70px] tracking-wide relative z-50">
+      <header className="border-b-2 border-cyan-300 flex shadow-lg py-4 px-4 sm:px-10 backgroundGray min-h-[70px] tracking-wide relative z-50">
         <div className="flex flex-wrap items-center justify-between gap-4 w-full">
           <div className="flex items-center ml-auto space-x-6">
             <Link href="/sign-in">
@@ -21,42 +21,65 @@ const Homepage = () => {
                 Sign up
               </Button>
             </Link>
-
-            <button id="toggleOpen" className="lg:hidden">
-              <svg
-                className="w-7 h-7"
-                fill="#333"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </button>
           </div>
         </div>
       </header>
-
-      <div className="text-gray-600 body-font ">
-        <div className="container mx-auto flex px-5 pt-24 items-center justify-center flex-col">
-          <Image
-            className="mb-4"
-            alt="hero"
-            height={400}
-            width={400}
-            src={logo}
-          />
-          <div className="text-center lg:w-2/3 w-full">
-            <p className="mb-8 leading-relaxed text-white">
-              Meggings kinfolk echo park stumptown DIY, kale chips beard
-              jianbing tousled. Chambray dreamcatcher trust fund, kitsch vice
-              godard disrupt ramps hexagon mustache umami snackwave tilde
-              chillwave ugh. Pour-over meditation PBR&amp;B pickled ennui celiac
-              mlkshk freegan photo booth af fingerstache pitchfork.
-            </p>
+      <div className="backgroundGray p-8 my-4 mx-5 rounded-2xl shadow-lg">
+        <div className="text-gray-600 body-font ">
+          <div className="container mx-auto flex px-5 pt-24 items-center justify-center flex-col">
+            <Image
+              className="mb-4"
+              alt="hero"
+              height={400}
+              width={400}
+              src={logo}
+            />
+            <div className="text-center lg:w-2/3 w-full">
+              <p className="mb-8 leading-relaxed text-white">
+                Meggings kinfolk echo park stumptown DIY, kale chips beard
+                jianbing tousled. Chambray dreamcatcher trust fund, kitsch vice
+                godard disrupt ramps hexagon mustache umami snackwave tilde
+                chillwave ugh. Pour-over meditation PBR&amp;B pickled ennui
+                celiac mlkshk freegan photo booth af fingerstache pitchfork.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="max-w-6xl mx-auto py-16 px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-md:max-w-md mx-auto">
+            <div className="backgroundCyan rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all">
+              <div className="p-8">
+                <h3 className="text-slate-800 text-lg font-semibold mb-3">
+                  Create
+                </h3>
+                <p className="text-slate-800 text-sm font-medium leading-relaxed">
+                  Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget
+                  risus enim. Mattis mauris semper sed amet vitae sed
+                </p>
+              </div>
+            </div>
+            <div className="backgroundCyan rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all">
+              <div className="p-8">
+                <h3 className="text-slate-800 text-lg font-semibold mb-3">
+                  Organize
+                </h3>
+                <p className="text-slate-800 text-sm font-medium leading-relaxed">
+                  Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget
+                  risus enim. Mattis mauris semper sed amet vitae sed
+                </p>
+              </div>
+            </div>
+            <div className="backgroundCyan rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all">
+              <div className="p-8">
+                <h3 className="text-slate-800 text-lg font-semibold mb-3">
+                  Share
+                </h3>
+                <p className="text-slate-800 text-sm font-medium leading-relaxed">
+                  Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget
+                  risus enim. Mattis mauris semper sed amet vitae sed
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -76,7 +99,6 @@ const Homepage = () => {
           </button>
         </div>
       </div>
-
       <div className="backgroundGray p-8 my-4 mx-5 rounded-2xl shadow-lg">
         <div className="relative isolate overflow-hidden backgroundGray px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-start lg:gap-y-10">
@@ -189,7 +211,7 @@ const Homepage = () => {
           </div>
         </div>
       </div>
-      <footer className="backgroundGray text-gray-300 py-6 px-16 tracking-wide">
+      <footer className="backgroundGray border-t-2 border-cyan-300 text-gray-300 py-6 px-16 tracking-wide">
         <div className="flex justify-between items-center max-lg:flex-col text-center flex-wrap gap-4">
           <p className="text-[15px] leading-loose">
             © Eventor. All rights reserved.

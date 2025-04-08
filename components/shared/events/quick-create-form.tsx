@@ -5,16 +5,10 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
 import {
   Select,
   SelectContent,
@@ -25,14 +19,10 @@ import {
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
-import { Calendar as CalendarIcon } from 'lucide-react';
 import Image from 'next/image';
 import { Input } from '@/components/ui/input';
-import { cn } from '@/lib/utils';
 import { createEvent } from '@/lib/actions/event.actions';
 import flaskImage from '@/public/images/icons/flask-bubble.png';
-import { format } from 'date-fns';
 import { insertEventSchema } from '@/lib/validators';
 import { toast } from 'sonner';
 import { useState } from 'react';
@@ -40,7 +30,6 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const QuickCreateForm = () => {
-  const [date, setDate] = useState<Date>();
   const [open, setOpen] = useState(false);
   const form = useForm<z.infer<typeof insertEventSchema>>({
     resolver: zodResolver(insertEventSchema),
@@ -116,7 +105,7 @@ const QuickCreateForm = () => {
                 <SelectItem value="friends-only">Friends Only</SelectItem>
               </SelectContent>
             </Select>
-            <Popover>
+            {/* <Popover>
               <PopoverTrigger asChild>
                 <Button
                   variant={'outline'}
@@ -150,7 +139,7 @@ const QuickCreateForm = () => {
                   initialFocus
                 />
               </PopoverContent>
-            </Popover>
+            </Popover> */}
             <Button variant="destructive" type="submit">
               Create Event
             </Button>
