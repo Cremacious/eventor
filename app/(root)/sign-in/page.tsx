@@ -2,11 +2,11 @@ import { SignIn } from '@clerk/nextjs';
 
 const SignInPage = () => {
   return (
-    <div className=" mt-12 p-4 md:flex justify-center items-center min-h-screen">
-      <div className="border-4 rounded-lg border-cyan-300">
+    <>
+      <div className="min-h-screen flex justify-center items-center">
         <SignIn />
       </div>
-    </div>
+    </>
   );
 };
 

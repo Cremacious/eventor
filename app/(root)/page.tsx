@@ -12,18 +12,19 @@ const Homepage = () => {
         <div className="flex flex-wrap items-center justify-between gap-4 w-full">
           <div className="flex items-center ml-auto space-x-6">
             <Link href="/sign-in">
-              <Button className="font-medium bg-white text-slate-800">
+              <Button className="font-medium bg-cyan-300  hover:bg-cyan-100 text-slate-800">
                 Login
               </Button>
             </Link>
             <Link href="/sign-up">
-              <Button className="px-4 py-2 text-sm rounded-sm font-medium text-slate-800 backgroundCyan">
+              <Button className="px-4 py-2 text-sm rounded-sm font-medium text-slate-800 bg-white hover:bg-slate-100">
                 Sign up
               </Button>
             </Link>
           </div>
         </div>
       </header>
+      {/* Logo */}
       <div className="backgroundGray p-8 my-4 mx-5 rounded-2xl shadow-lg">
         <div className="text-gray-600 body-font ">
           <div className="container mx-auto flex px-5 pt-24 items-center justify-center flex-col">
@@ -34,7 +35,7 @@ const Homepage = () => {
               width={400}
               src={logo}
             />
-            <div className="text-center lg:w-2/3 w-full">
+            <div className="text-center lg:w-2/3 w-full mt-7">
               <p className="mb-8 leading-relaxed text-white">
                 Meggings kinfolk echo park stumptown DIY, kale chips beard
                 jianbing tousled. Chambray dreamcatcher trust fund, kitsch vice
@@ -45,9 +46,10 @@ const Homepage = () => {
             </div>
           </div>
         </div>
+        {/* Features */}
         <div className="max-w-6xl mx-auto py-16 px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-md:max-w-md mx-auto">
-            <div className="backgroundCyan rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all">
+            <div className="backgroundCyan rounded-2xl overflow-hidden shadow-lg hover:shadow-lg transition-all">
               <div className="p-8">
                 <h3 className="text-slate-800 text-lg font-semibold mb-3">
                   Create
@@ -83,6 +85,7 @@ const Homepage = () => {
           </div>
         </div>
       </div>
+      {/* Banner */}
       <div className="bg-gradient-to-r backgroundCyan  px-6 py-12">
         <div className="container mx-auto flex flex-col justify-center items-center text-center">
           <h2 className="text-slate-800 sm:text-4xl text-3xl font-bold mb-6">
@@ -99,6 +102,7 @@ const Homepage = () => {
           </button>
         </div>
       </div>
+      {/* Details */}
       <div className="backgroundGray p-8 my-4 mx-5 rounded-2xl shadow-lg">
         <div className="relative isolate overflow-hidden backgroundGray px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-start lg:gap-y-10">
