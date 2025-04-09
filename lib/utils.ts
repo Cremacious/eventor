@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { format, parse } from 'date-fns';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -12,7 +13,6 @@ export function convertToPlainObject<T>(value: T): T {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function formatError(error: any) {
   if (error.name === 'ZodError') {
-    // Handle Zod error
     const fieldErrors = Object.keys(error.errors).map(
       (field) => error.errors[field].message
     );
@@ -28,5 +28,15 @@ export function formatError(error: any) {
     return typeof error.message === 'string'
       ? error.message
       : JSON.stringify(error.message);
+  }
+}
+
+export function formatDate(dateString: string): string {
+  try {
+    const date = parse(dateString, 'MM-dd-yyyy', new Date());
+    return format(date, 'MMMM do, yyyy');
+  } catch (error) {
+    console.error('Invalid date format:', error);
+    return 'Invalid date';
   }
 }
