@@ -1,9 +1,22 @@
 const EventDetailsPAge = () => {
   return (
-    <div>
-      <div className="min-h-screen flex mx-auto justify-center items-center">
-        <section className="text-gray-600 body-font overflow-hidden w-4/5 md:w-1/2">
+    <div className="my-4">
+        <div className="container mx-auto flex items-center justify-center flex-col">
+          <img
+            className="lg:w-2/6 md:w-3/6 w-5/6 mb-5 object-cover object-center rounded-4xl"
+            alt="hero"
+            src="https://dummyimage.com/720x600"
+          />
+      </div>
+      <div className="flex mx-auto justify-center items-center">
+        <div className="text-gray-600 body-font overflow-hidden w-4/5 md:w-1/2">
           <div className="p-8 backgroundGray rounded-2xl shadow-lg">
+            <div className="">
+              <h1 className="textCyan text-center text-3xl title-font font-medium mb-4">
+                Kelly's Graduation
+              </h1>
+            </div>
+
             <div className="flex mb-4">
               <a className="flex-grow textCyan border-b-2 border-cyan-300 py-2 text-lg px-1">
                 Description
@@ -30,7 +43,7 @@ const EventDetailsPAge = () => {
               </button>
             </div>
           </div>
-        </section>
+        </div>
       </div>
     </div>
   );
