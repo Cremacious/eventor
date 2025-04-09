@@ -117,15 +117,6 @@ body {
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-/* @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-} */
-
 @layer base {
   * {
     @apply border-border;
@@ -138,7 +129,7 @@ body {
   }
   .dark body {
     @apply bg-background text-foreground;
-    background-image: url('./logo-bg3.png'); /* Replace with your dark mode background image */
+    background-image: url('./logo-bg3.png');
     background-repeat: repeat;
     background-attachment: fixed;
   }
@@ -146,6 +137,9 @@ body {
   @layer utilities {
     .newScreen {
       @apply p-8 min-h-screen mx-5 rounded-2xl text-slate-800;
+    }
+    .animationEffect {
+      @apply hover:scale-105 transition-transform cursor-pointer;
     }
   }
 }

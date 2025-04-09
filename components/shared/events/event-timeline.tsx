@@ -45,7 +45,7 @@ const EventTimeline = () => {
               {/* Timeline dot */}
               <div className="absolute h-3 w-3 -translate-x-1/2 left-px top-3 rounded-full border-2 border-primary bg-background" />
               {/* Content */}
-              <div className="space-y-3 p-4 rounded-2xl bg-white">
+              <div className="space-y-3 p-4 rounded-2xl bg-white animationEffect">
                 <div>
                   <h3 className="text-lg sm:text-xl font-medium">{name}</h3>
                   <div className="flex items-center gap-2 mt-1 text-sm">
