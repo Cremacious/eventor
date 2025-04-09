@@ -21,7 +21,9 @@ const SidebarMain = () => {
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
           <SidebarMenuItem className="flex items-center gap-2">
-            <SidebarMenuButton><QuickCreateForm /></SidebarMenuButton>
+            <SidebarMenuButton>
+              <QuickCreateForm />
+            </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
         <SidebarMenu>
@@ -68,7 +70,27 @@ const SidebarMain = () => {
               </Link>
             </SidebarMenuItem>
           </div>
+          <div className="md:hidden">
+            <SidebarMenuItem>
+              <Link href="/dashboard/calendar">
+                <SidebarMenuButton onClick={toggleSidebar} tooltip="">
+                  <LayoutDashboard className="text-sidebar-foreground/70" />
+                  <span>My Calendar</span>
+                </SidebarMenuButton>
+              </Link>
+            </SidebarMenuItem>
+          </div>
 
+          <div className="hidden md:block">
+            <SidebarMenuItem>
+              <Link href="/dashboard/calendar">
+                <SidebarMenuButton tooltip="">
+                  <LayoutDashboard className="text-sidebar-foreground/70" />
+                  <span>My Calendar</span>
+                </SidebarMenuButton>
+              </Link>
+            </SidebarMenuItem>
+          </div>
           <div className="md:hidden">
             <SidebarMenuItem>
               <Link href="/dashboard/friends">

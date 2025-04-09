@@ -84,7 +84,7 @@ body {
 }
 
 .dark {
-  --background: rgb(34, 37, 37);
+  --background: rgb(53, 52, 52);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -136,10 +136,16 @@ body {
     background-repeat: repeat;
     background-attachment: fixed;
   }
+  .dark body {
+    @apply bg-background text-foreground;
+    background-image: url('./logo-bg3.png'); /* Replace with your dark mode background image */
+    background-repeat: repeat;
+    background-attachment: fixed;
+  }
 
   @layer utilities {
     .newScreen {
-      @apply p-8 min-h-screen mx-5 rounded-2xl shadow-lg text-slate-800;
+      @apply p-8 min-h-screen mx-5 rounded-2xl text-slate-800;
     }
   }
 }
