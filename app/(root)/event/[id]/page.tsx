@@ -1,9 +1,10 @@
-import { getEventById } from '@/lib/actions/event.actions';
 import { formatDate, formatVisibility } from '@/lib/utils';
 
-const EventDetailsPAge = async ({ params }: { params: { id: string } }) => {
-  const eventId = params.id;
-  const event = await getEventById(eventId);
+import { getEventById } from '@/lib/actions/event.actions';
+
+const EventDetailsPAge = async (props: { params: Promise<{ id: string }> }) => {
+  const { id } = await props.params;
+  const event = await getEventById(id);
   if (!event) {
     return (
       <div className="flex justify-center items-center h-screen">
