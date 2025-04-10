@@ -1,3 +1,5 @@
+import { UserButton, UserProfile } from '@clerk/nextjs';
+
 import { Button } from '@/components/ui/button';
 import Header from '@/components/header';
 import Image from 'next/image';
@@ -47,6 +49,7 @@ const Homepage = () => {
           </div>
         </div>
         {/* Features */}
+        <UserButton />
         <div className="max-w-6xl mx-auto py-16 px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-md:max-w-md mx-auto">
             <div className="backgroundCyan rounded-2xl overflow-hidden shadow-lg hover:shadow-lg transition-all">

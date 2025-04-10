@@ -8,3 +8,8 @@ export const insertEventSchema = z.object({
   visibility: z.string().min(1, { message: 'Visibility is required' }),
 });
 
+export const updateProfileSchema = z.object({
+  displayName: z.string().min(3, 'Name must be at least 3 characters'),
+  email: z.string().min(3, 'Name must be at least 3 characters'),
+  imageUrl: z.string().url().optional(),
+});
