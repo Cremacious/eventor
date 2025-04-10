@@ -102,11 +102,11 @@ const QuickCreateForm = () => {
               {...form.register('type')}
               className="w-full"
             />
-            {/* <Input
+            <Input
               placeholder="Location"
               {...form.register('location')}
               className="w-full"
-            /> */}
+            />
 
             <Select
               onValueChange={(value) => form.setValue('visibility', value)}
