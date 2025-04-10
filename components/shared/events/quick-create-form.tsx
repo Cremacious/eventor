@@ -47,15 +47,12 @@ const QuickCreateForm = () => {
   const onSubmit: SubmitHandler<z.infer<typeof insertEventSchema>> = async (
     data
   ) => {
-    console.log(data);
-
     const response = await createEvent(data);
     if (response.success) {
       form.reset();
       toast.success(response.message);
       setOpen(false);
     } else {
-      console.log(response);
       toast.error(response.message);
     }
   };

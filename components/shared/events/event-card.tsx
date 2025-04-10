@@ -1,29 +1,39 @@
 import { Event } from '@/lib/types/index';
 import Image from 'next/image';
 import image from '@/public/images/stock.jpg';
+import { Calendar } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 
 const EventCard = ({ event }: { event: Event }) => {
   return (
     <>
-      <div className="backgroundDark shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] p-2 w-full max-w-sm rounded-2xl overflow-hidden mx-auto mt-4 hover:scale-105 transition-transform cursor-pointer">
-        <div className="aspect-[3/2]">
-          <Image
-            src={image}
-            alt="name"
-            className="w-full h-full object-cover rounded-2xl"
-          />
-        </div>
-        <div className="p-6">
-          <div className="text-lg text-center md:text-2xl text-white font-bold break-words">
-            {event.name}
-          </div>
-          <div className="mt-8 flex items-center">
-            <h3 className="text-base text-md text-white font-bold flex-1">
-              {event.date}
-            </h3>
-          </div>
-        </div>
-      </div>
+        <div key={event.name} className="relative pl-8 pb-12 last:pb-0">
+                  {/* Timeline dot */}
+                  <div className="absolute h-3 w-3 -translate-x-1/2 left-px top-3 rounded-full border-2 border-primary bg-background" />
+                  {/* Content */}
+                  <div className="space-y-3 p-4 rounded-2xl bg-white animationEffect">
+                    <div>
+                      <h3 className="text-lg sm:text-xl font-medium">{event.name}</h3>
+                      <div className="flex items-center gap-2 mt-1 text-sm">
+                        <Calendar className="h-4 w-4" />
+                        <span>{event.date}</span>
+                      </div>
+                    </div>
+                    <p className="text-sm sm:text-base text-muted-foreground">
+                      {event.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                    
+                        <Badge
+                          variant="secondary"
+                          className="rounded-full"
+                        >
+                          tch
+                        </Badge>
+                  
+                    </div>
+                  </div>
+                </div>
     </>
   );
 };

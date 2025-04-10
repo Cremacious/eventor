@@ -1,4 +1,3 @@
-import AllEventsCard from '@/components/shared/events/all-events';
 import EventTimeline from '@/components/shared/events/event-timeline';
 import { Input } from '@/components/ui/input';
 const DashboardPage = () => {
