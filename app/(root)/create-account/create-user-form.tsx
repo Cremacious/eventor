@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { Input } from '@/components/ui/input';
 import { UploadButton } from '@/lib/uploadthing';
 import image from '@/public/full-logo.png';
+import { redirect } from 'next/navigation';
 import { toast } from 'sonner';
 import { updateProfile } from '@/lib/actions/user.actions';
 import { updateProfileSchema } from '@/lib/validators';
@@ -24,6 +25,7 @@ const CreateUserForm = () => {
     const response = await updateProfile(data);
     if (response.success) {
       toast.success(response.message);
+      redirect('/dashboard');
     } else {
       toast.error(response.message);
     }
@@ -53,9 +55,11 @@ const CreateUserForm = () => {
           <Button
             variant="outline"
             className=" text-white rounded-lg p-2 mt-4 mr-2"
+            onClick={redirect('/dashboard')}
           >
             Skip
           </Button>
+
           <Button type="submit" className="rounded-lg p-2 mt-4 mr-2">
             Submit
           </Button>

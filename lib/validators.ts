@@ -6,6 +6,8 @@ export const insertEventSchema = z.object({
   type: z.string().min(1, { message: 'Type is required' }),
   date: z.string().min(1, { message: 'Date is required' }),
   visibility: z.string().min(1, { message: 'Visibility is required' }),
+  location: z.string().optional(),
+  guests: z.array(z.string()).optional(),
 });
 
 export const updateProfileSchema = z.object({

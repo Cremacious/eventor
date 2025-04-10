@@ -55,6 +55,7 @@ const QuickCreateForm = () => {
       toast.success(response.message);
       setOpen(false);
     } else {
+      console.log(response);
       toast.error(response.message);
     }
   };
@@ -101,6 +102,11 @@ const QuickCreateForm = () => {
               {...form.register('type')}
               className="w-full"
             />
+            {/* <Input
+              placeholder="Location"
+              {...form.register('location')}
+              className="w-full"
+            /> */}
 
             <Select
               onValueChange={(value) => form.setValue('visibility', value)}

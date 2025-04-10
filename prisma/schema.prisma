@@ -34,8 +34,11 @@ model Event {
    images      String[]
    date        String
    visibility  String
+   location    String @default("")
+   guests      String[]
    description String
    createdAt   DateTime     @default(now()) @db.Timestamp(6)
    user        User         @relation(fields: [userId], references: [clerkUserId], onDelete: Cascade)
    @@index([userId])
 }
+
