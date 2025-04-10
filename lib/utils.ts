@@ -40,3 +40,10 @@ export function formatDate(dateString: string): string {
     return 'Invalid date';
   }
 }
+
+export function formatVisibility(visibility: string): string {
+  return visibility
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}

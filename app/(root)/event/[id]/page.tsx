@@ -1,11 +1,8 @@
 import { getEventById } from '@/lib/actions/event.actions';
+import { formatDate, formatVisibility } from '@/lib/utils';
 
-const EventDetailsPAge = async ({
-  params,
-}: {
-  params: { eventId: string };
-}) => {
-  const eventId = params.eventId;
+const EventDetailsPAge = async ({ params }: { params: { id: string } }) => {
+  const eventId = params.id;
   const event = await getEventById(eventId);
   if (!event) {
     return (
@@ -39,19 +36,19 @@ const EventDetailsPAge = async ({
               </a>
             </div>
             <p className="text-white leading-relaxed mb-4">
-              Fam locavore kickstarter distillery. Mixtape chillwave tumeric
-              sriracha taximy chia microdosing tilde DIY. XOXO fam inxigo
-              juiceramps cornhole raw denim forage brooklyn. Everyday carry +1
-              seitan poutine tumeric. Gastropub blue bottle austin listicle
-              pour-over, neutra jean.
+              {event.description}
             </p>
             <div className="flex border-t border-gray-200 py-2">
               <span className="textCyan">Date</span>
-              <span className="ml-auto text-white">December 18th, 2024</span>
+              <span className="ml-auto text-white">
+                {formatDate(event.date)}
+              </span>
             </div>
             <div className="flex border-t border-gray-200 py-2">
               <span className="textCyan">Visibility</span>
-              <span className="ml-auto text-white">Friends Only</span>
+              <span className="ml-auto text-white">
+                {formatVisibility(event.visibility)}
+              </span>
             </div>
             <div className="flex">
               <button className="flex ml-auto mt-2 text-white backgroundCyan py-2 px-6  hover:bg-cyan-200 rounded">
