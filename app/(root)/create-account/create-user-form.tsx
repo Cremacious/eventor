@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { UploadButton } from '@/lib/uploadthing';
 import image from '@/public/full-logo.png';
 import { toast } from 'sonner';
+import { updateProfile } from '@/lib/actions/user.actions';
 import { updateProfileSchema } from '@/lib/validators';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -20,7 +21,12 @@ const CreateUserForm = () => {
   const onSubmit: SubmitHandler<z.infer<typeof updateProfileSchema>> = async (
     data
   ) => {
-    console.log(data);
+    const response = await updateProfile(data);
+    if (response.success) {
+      toast.success(response.message);
+    } else {
+      toast.error(response.message);
+    }
   };
 
   return (

@@ -1,5 +1,11 @@
-import { currentUser } from '@clerk/nextjs/server';
+'use server'
+
+import { auth, currentUser } from '@clerk/nextjs/server';
+
 import { db } from '@/lib/db';
+import { formatError } from '../utils';
+import { updateProfileSchema } from '../validators';
+import { z } from 'zod';
 
 export const checkUser = async () => {
   const user = await currentUser();
@@ -32,4 +38,33 @@ export const checkUser = async () => {
   });
 
   return newUser;
+};
+
+export const updateProfile = async (
+  data: z.infer<typeof updateProfileSchema>
+) => {
+  try {
+    const user = await auth();
+    if (!user) throw new Error('User not authenticated');
+    const userId = user.userId;
+    const dbUser = await db.user.findUnique({
+      where: {
+        clerkUserId: userId ?? undefined,
+      },
+    });
+    if (!dbUser) throw new Error('User not found in database');
+    const userData = updateProfileSchema.parse(data);
+    await db.user.update({
+      where: {
+        clerkUserId: dbUser.clerkUserId,
+      },
+      data: { displayName: userData.displayName },
+    });
+    return {
+      success: true,
+      message: `User updated`,
+    };
+  } catch (error) {
+    return { success: false, message: formatError(error) };
+  }
 };

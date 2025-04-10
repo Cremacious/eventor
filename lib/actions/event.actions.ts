@@ -2,7 +2,6 @@
 
 import { User } from 'lucide-react';
 import { auth } from '@clerk/nextjs/server';
-import { currentUser } from '@clerk/nextjs/server';
 import { db } from '@/lib/db';
 import { formatError } from '../utils';
 import { insertEventSchema } from '../validators';
