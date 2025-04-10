@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 export const insertEventSchema = z.object({
+  id: z.string().min(3, 'ID must be at least 3 characters'),
   name: z.string().min(1, { message: 'Name is required' }),
   description: z.string().min(1, { message: 'Description is required' }),
   type: z.string().min(1, { message: 'Type is required' }),

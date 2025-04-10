@@ -1,8 +1,6 @@
 'use server';
 
-import { User } from 'lucide-react';
 import { auth } from '@clerk/nextjs/server';
-import { currentUser } from '@clerk/nextjs/server';
 import { db } from '@/lib/db';
 import { formatError } from '../utils';
 import { insertEventSchema } from '../validators';
@@ -69,5 +67,18 @@ export async function getAllUserEvents() {
     return events;
   } catch (error) {
     return [];
+  }
+}
+
+export async function getEventById(eventId: string) {
+  try {
+  const event = db.event.findUnique({
+    where: {
+      id: eventId,
+    }
+  })
+  return event
+  } catch (error) {
+    
   }
 }
