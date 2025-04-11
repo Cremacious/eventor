@@ -11,7 +11,6 @@ export const insertEventSchema = z.object({
   guests: z.array(z.string()).optional(),
 });
 
-export const updateProfileSchema = z.object({
+export const updateDisplayNameSchema = z.object({
   displayName: z.string().min(3, 'Name must be at least 3 characters'),
-  imageUrl: z.string().url().optional(),
 });

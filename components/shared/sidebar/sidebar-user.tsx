@@ -1,14 +1,16 @@
 import { SidebarMenu, SidebarMenuItem } from '@/components/ui/sidebar';
 import { auth, currentUser } from '@clerk/nextjs/server';
+import { checkUser, getUserDisplayName } from '@/lib/actions/user.actions';
 
 import Link from 'next/link';
 import { Settings } from 'lucide-react';
 import { UserButton } from '@clerk/nextjs';
-import { checkUser } from '@/lib/actions/user.actions';
+import { redirect } from 'next/navigation';
 
 const SidebarUser = async () => {
-  // const user = await currentUser();
   const session = await checkUser();
+  const displayName = await getUserDisplayName();
+  console.log(displayName, 'displayName');
 
   return (
     <SidebarMenu
@@ -19,7 +21,13 @@ const SidebarUser = async () => {
         <div className=" flex flex-row">
           <UserButton />
           <div className="ml-2 grid flex-1 text-left text-sm text-slate-800">
-            <span className="truncate font-medium">{session?.name}</span>
+            <span className="truncate font-medium">
+              {displayName === null ? (
+                <Link href={'/dashboard/display-name'}>Set Display Name</Link>
+              ) : (
+                displayName
+              )}
+            </span>
             <span className="truncate text-sm">{session?.email}</span>
           </div>
           <Link

@@ -47,6 +47,7 @@ const QuickCreateForm = () => {
   const onSubmit: SubmitHandler<z.infer<typeof insertEventSchema>> = async (
     data
   ) => {
+    console.log(data);
     const response = await createEvent(data);
     if (response.success) {
       form.reset();
@@ -152,7 +153,7 @@ const QuickCreateForm = () => {
                 />
               </PopoverContent>
             </Popover>
-            <Button variant="destructive" type="submit">
+            <Button type="submit">
               Create Event
             </Button>
           </form>

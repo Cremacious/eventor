@@ -1,10 +1,11 @@
-'use server'
+'use server';
 
 import { auth, currentUser } from '@clerk/nextjs/server';
 
 import { db } from '@/lib/db';
 import { formatError } from '../utils';
-import { updateProfileSchema } from '../validators';
+import { revalidatePath } from 'next/cache';
+import { updateDisplayNameSchema } from '../validators';
 import { z } from 'zod';
 
 export const checkUser = async () => {
@@ -40,8 +41,25 @@ export const checkUser = async () => {
   return newUser;
 };
 
-export const updateProfile = async (
-  data: z.infer<typeof updateProfileSchema>
+export const getUserDisplayName = async () => {
+  try {
+    const user = await auth();
+    if (!user) throw new Error('User not authenticated');
+    const userId = user.userId;
+    const dbUser = await db.user.findUnique({
+      where: {
+        clerkUserId: userId ?? undefined,
+      },
+    });
+    if (!dbUser) throw new Error('User not found in database');
+    return dbUser.displayName;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const updateDisplayName = async (
+  data: z.infer<typeof updateDisplayNameSchema>
 ) => {
   try {
     const user = await auth();
@@ -53,16 +71,17 @@ export const updateProfile = async (
       },
     });
     if (!dbUser) throw new Error('User not found in database');
-    const userData = updateProfileSchema.parse(data);
+    const userData = updateDisplayNameSchema.parse(data);
     await db.user.update({
       where: {
         clerkUserId: dbUser.clerkUserId,
       },
       data: { displayName: userData.displayName },
     });
+    revalidatePath('/dashboard');
     return {
       success: true,
-      message: `User updated`,
+      message: `Display name updated`,
     };
   } catch (error) {
     return { success: false, message: formatError(error) };
