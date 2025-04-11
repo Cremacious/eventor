@@ -26,6 +26,7 @@ const DisplayNameForm = () => {
     if (response.success) {
       form.reset();
       toast.success(response.message);
+      redirect('/dashboard')
     } else {
       toast.error(response.message);
     }

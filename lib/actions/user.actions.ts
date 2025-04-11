@@ -42,7 +42,6 @@ export const checkUser = async () => {
 };
 
 export const getUserDisplayName = async () => {
-  try {
     const user = await auth();
     if (!user) throw new Error('User not authenticated');
     const userId = user.userId;
@@ -51,11 +50,8 @@ export const getUserDisplayName = async () => {
         clerkUserId: userId ?? undefined,
       },
     });
-    if (!dbUser) throw new Error('User not found in database');
+    if (dbUser === null) return 'Display name not set'
     return dbUser.displayName;
-  } catch (error) {
-    return null;
-  }
 };
 
 export const updateDisplayName = async (
@@ -86,4 +82,17 @@ export const updateDisplayName = async (
   } catch (error) {
     return { success: false, message: formatError(error) };
   }
+};
+
+export const getUserById = async (id: string) => {
+  const user = await auth();
+  if (!user) throw new Error('User not authenticated');
+  const userId = user.userId;
+  const dbUser = await db.user.findUnique({
+    where: {
+      clerkUserId: userId ?? undefined,
+    },
+  });
+  if (!dbUser) throw new Error('User not found in database');
+  return dbUser
 };

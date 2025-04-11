@@ -8,9 +8,8 @@ import { UserButton } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
 
 const SidebarUser = async () => {
-  const session = await checkUser();
   const displayName = await getUserDisplayName();
-  console.log(displayName, 'displayName');
+
 
   return (
     <SidebarMenu
@@ -22,13 +21,9 @@ const SidebarUser = async () => {
           <UserButton />
           <div className="ml-2 grid flex-1 text-left text-sm text-slate-800">
             <span className="truncate font-medium">
-              {displayName === null ? (
-                <Link href={'/dashboard/display-name'}>Set Display Name</Link>
-              ) : (
-                displayName
-              )}
+              {displayName}
             </span>
-            <span className="truncate text-sm">{session?.email}</span>
+            {/* <span className="truncate text-sm">{session?.email}</span> */}
           </div>
           <Link
             href="/dashboard/settings"
