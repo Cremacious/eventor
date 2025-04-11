@@ -1,6 +1,7 @@
 import { getUserById } from '@/lib/actions/user.actions';
 import Image from 'next/image';
 import image from '@/public/images/stock.jpg';
+import { Button } from '@/components/ui/button';
 const UserPage = async (props: { params: Promise<{ id: string }> }) => {
   const { id } = await props.params;
   const user = await getUserById(id);
@@ -22,6 +23,7 @@ const UserPage = async (props: { params: Promise<{ id: string }> }) => {
             <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium textCyan">
               {user.displayName}'s Events
             </h1>
+            <Button>Add As Friend</Button>
           </div>
         </div>
       </section>

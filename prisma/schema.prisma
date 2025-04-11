@@ -17,6 +17,8 @@ model User {
   updatedAt   DateTime @updatedAt
   displayName String?
   events      Event[]
+  friends     User[]   @relation("UserFriends")
+  friendOf    User[]   @relation("UserFriends")
 }
 
 model Event {
@@ -35,3 +37,4 @@ model Event {
 
   @@index([userId])
 }
+

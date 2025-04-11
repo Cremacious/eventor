@@ -96,3 +96,62 @@ export const getUserById = async (id: string) => {
   if (!dbUser) throw new Error('User not found in database');
   return dbUser
 };
+
+export async function addFriend(userId: string, friendId: string) {
+  try {
+    await db.user.update({
+      where: { id: userId },
+      data: {
+        friends: {
+          connect: { id: friendId },
+        },
+      },
+    });
+
+    return { success: true, message: 'Friend added successfully' };
+  } catch (error) {
+    console.error('Error adding friend:', error);
+    return { success: false, message: 'Failed to add friend' };
+  }
+}
+
+export async function getFriends(userId: string) {
+  try {
+    const user = await db.user.findUnique({
+      where: { id: userId },
+      include: { friends: true },
+    });
+
+    return user?.friends || [];
+  } catch (error) {
+    console.error('Error fetching friends:', error);
+    return [];
+  }
+}
+
+export async function getVisibleEvents(userId: string) {
+  try {
+    const user = await db.user.findUnique({
+      where: { id: userId },
+      include: { friends: true },
+    });
+
+    const friendIds = user?.friends.map((friend) => friend.id) || [];
+
+    const events = await db.event.findMany({
+      where: {
+        OR: [
+          { visibility: 'public' },
+          { visibility: 'private', userId },
+          { visibility: 'friends-only', userId: { in: friendIds } },
+        ],
+      },
+    });
+
+    return events;
+  } catch (error) {
+    console.error('Error fetching events:', error);
+    return [];
+  }
+}
+
