@@ -41,17 +41,30 @@ export const checkUser = async () => {
   return newUser;
 };
 
+export const getCurrentUserId = async () => {
+  const user = await auth();
+  if (!user) throw new Error('User not authenticated');
+  const userId = user.userId;
+  const dbUser = await db.user.findUnique({
+    where: {
+      clerkUserId: userId ?? undefined,
+    },
+  });
+  if (dbUser === null) return 'Display name not set';
+  return dbUser.id;
+};
+
 export const getUserDisplayName = async () => {
-    const user = await auth();
-    if (!user) throw new Error('User not authenticated');
-    const userId = user.userId;
-    const dbUser = await db.user.findUnique({
-      where: {
-        clerkUserId: userId ?? undefined,
-      },
-    });
-    if (dbUser === null) return 'Display name not set'
-    return dbUser.displayName;
+  const user = await auth();
+  if (!user) throw new Error('User not authenticated');
+  const userId = user.userId;
+  const dbUser = await db.user.findUnique({
+    where: {
+      clerkUserId: userId ?? undefined,
+    },
+  });
+  if (dbUser === null) return 'Display name not set';
+  return dbUser.displayName;
 };
 
 export const updateDisplayName = async (
@@ -85,16 +98,13 @@ export const updateDisplayName = async (
 };
 
 export const getUserById = async (id: string) => {
-  const user = await auth();
-  if (!user) throw new Error('User not authenticated');
-  const userId = user.userId;
   const dbUser = await db.user.findUnique({
     where: {
-      clerkUserId: userId ?? undefined,
+      id,
     },
   });
   if (!dbUser) throw new Error('User not found in database');
-  return dbUser
+  return dbUser;
 };
 
 export async function addFriend(userId: string, friendId: string) {
@@ -154,4 +164,3 @@ export async function getVisibleEvents(userId: string) {
     return [];
   }
 }
-

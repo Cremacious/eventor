@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import EventTimeline from '@/components/shared/events/event-timeline';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
@@ -10,7 +11,12 @@ const DashboardPage = () => {
           <h2 className="text-2xl text-center mb-4 text-white">
             Search Events
           </h2>
-        
+          <Link href="/dashboard/user/48d27116-5f32-4faf-ad92-1706e23ba835">
+            <Button>Go to Account 2</Button>
+          </Link>
+          <Link href="/dashboard/user/b847bfc0-9f75-48ea-bc19-778cad90614a">
+            <Button>Go to Chris is cool</Button>
+          </Link>
           <Input
             className="text-center text-white"
             placeholder="Event name..."
