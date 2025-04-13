@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import EventTimeline from '@/components/shared/events/event-timeline';
+import FriendsList from '@/components/shared/friends/friends-list';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 
@@ -17,6 +18,7 @@ const DashboardPage = () => {
           <Link href="/dashboard/user/b847bfc0-9f75-48ea-bc19-778cad90614a">
             <Button>Go to Chris is cool</Button>
           </Link>
+          <FriendsList />
           <Input
             className="text-center text-white"
             placeholder="Event name..."
