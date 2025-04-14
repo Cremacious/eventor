@@ -1,4 +1,4 @@
-import { UserButton, UserProfile } from '@clerk/nextjs';
+import { SignOutButton, SignedIn, SignedOut } from '@clerk/nextjs';
 
 import { Button } from '@/components/ui/button';
 import Header from '@/components/header';
@@ -13,16 +13,26 @@ const Homepage = () => {
       <header className="border-b-2 border-cyan-300 flex shadow-lg py-4 px-4 sm:px-10 backgroundGray min-h-[70px] tracking-wide relative z-50">
         <div className="flex flex-wrap items-center justify-between gap-4 w-full">
           <div className="flex items-center ml-auto space-x-6">
-            <Link href="/sign-in">
-              <Button className="font-medium bg-cyan-300  hover:bg-cyan-100 text-slate-800">
-                Login
-              </Button>
-            </Link>
-            <Link href="/sign-up">
-              <Button className="px-4 py-2 text-sm rounded-sm font-medium text-slate-800 bg-white hover:bg-slate-100">
-                Sign up
-              </Button>
-            </Link>
+            <SignedOut>
+              <Link href="/sign-in">
+                <Button className="font-medium bg-cyan-300  hover:bg-cyan-100 text-slate-800">
+                  Login
+                </Button>
+              </Link>
+              <Link href="/sign-up">
+                <Button className="px-4 py-2 text-sm rounded-sm font-medium text-slate-800 bg-white hover:bg-slate-100">
+                  Sign up
+                </Button>
+              </Link>
+            </SignedOut>
+            <SignedIn>
+              <SignOutButton />
+              <Link href="/dashboard">
+                <Button className="font-medium bg-cyan-300  hover:bg-cyan-100 text-slate-800">
+                  Go To Dashboard
+                </Button>
+              </Link>
+            </SignedIn>
           </div>
         </div>
       </header>
@@ -49,7 +59,6 @@ const Homepage = () => {
           </div>
         </div>
         {/* Features */}
-        <UserButton />
         <div className="max-w-6xl mx-auto py-16 px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-md:max-w-md mx-auto">
             <div className="backgroundCyan rounded-2xl overflow-hidden shadow-lg hover:shadow-lg transition-all">
