@@ -14,3 +14,14 @@ export const insertEventSchema = z.object({
 export const updateDisplayNameSchema = z.object({
   displayName: z.string().min(3, 'Name must be at least 3 characters'),
 });
+
+export const friendSchema = z.object({
+  name: z.string().nullable(), // Allows null or string
+  id: z.string(), // Required string
+  clerkUserId: z.string(), // Required string
+  email: z.string().email(), // Valid email string
+  imageUrl: z.string().nullable(), // Allows null or string
+  createdAt: z.date(), // Date object
+  updatedAt: z.date(), // Date object
+  displayName: z.string().nullable(), // Allows null or string
+});

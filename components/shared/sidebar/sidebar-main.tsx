@@ -72,21 +72,21 @@ const SidebarMain = () => {
           </div>
           <div className="md:hidden">
             <SidebarMenuItem>
-              <Link href="/dashboard/calendar">
+              <Link href="/dashboard/create-event">
                 <SidebarMenuButton onClick={toggleSidebar} tooltip="">
                   <LayoutDashboard className="text-sidebar-foreground/70" />
-                  <span>My Calendar</span>
+                  <span>Create Event</span>
                 </SidebarMenuButton>
               </Link>
-            </SidebarMenuItem>
+            </SidebarMenuItem>s
           </div>
 
           <div className="hidden md:block">
             <SidebarMenuItem>
-              <Link href="/dashboard/calendar">
+              <Link href="/dashboard/create-event">
                 <SidebarMenuButton tooltip="">
                   <LayoutDashboard className="text-sidebar-foreground/70" />
-                  <span>My Calendar</span>
+                  <span>Create Event</span>
                 </SidebarMenuButton>
               </Link>
             </SidebarMenuItem>
