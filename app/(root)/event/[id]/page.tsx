@@ -51,6 +51,12 @@ const EventDetailsPAge = async (props: { params: Promise<{ id: string }> }) => {
                 {formatVisibility(event.visibility)}
               </span>
             </div>
+            <div className="flex border-t border-gray-200 py-2">
+              <span className="textCyan">Guests</span>
+              <span className="ml-auto text-white">
+                {/* {event.guests.map((guest) => <div key={guest.id}>{guest.displayName}</div>)}   */}
+              </span>
+            </div>
             <div className="flex">
               <button className="flex ml-auto mt-2 text-white backgroundCyan py-2 px-6  hover:bg-cyan-200 rounded">
                 RSVP

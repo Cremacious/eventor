@@ -34,6 +34,11 @@ const CreateEventForm = ({
 }) => {
   const form = useForm<z.infer<typeof insertEventSchema>>({
     resolver: zodResolver(insertEventSchema),
+    defaultValues: {
+      id: crypto.randomUUID(), // Generate a unique ID
+      guests: [], // Default to an empty array
+      location: '', // Default to an empty string
+    },
   });
 
   const onSubmit: SubmitHandler<z.infer<typeof insertEventSchema>> = async (
@@ -66,7 +71,9 @@ const CreateEventForm = ({
       <form
         className="space-y-4"
         method="Post"
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={form.handleSubmit(onSubmit, (errors) => {
+          console.log('Validation errors:', errors); // Debugging log
+        })}
       >
         <Input
           placeholder="Event Name"
