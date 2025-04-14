@@ -1,4 +1,8 @@
-import { getCurrentUserId, getUserById } from '@/lib/actions/user.actions';
+import {
+  checkIfFriend,
+  getCurrentUserId,
+  getUserById,
+} from '@/lib/actions/user.actions';
 
 import AddUser from '@/components/shared/add-user';
 import { Button } from '@/components/ui/button';
@@ -10,6 +14,7 @@ const UserPage = async (props: { params: Promise<{ id: string }> }) => {
   const { id } = await props.params;
   const user = await getUserById(id);
   const currentUser = await getCurrentUserId();
+  const isFriend = await checkIfFriend(currentUser, id);
 
   if (!user) return <div>User not found</div>;
 
@@ -28,10 +33,11 @@ const UserPage = async (props: { params: Promise<{ id: string }> }) => {
             <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium textCyan">
               {user.displayName}'s Events
             </h1>
-            <p>{id}</p>
-            <p>{user.clerkUserId}</p>
-
-            <AddUser userId={currentUser} friendId={id} />
+            {isFriend ? (
+              <div>Friends</div>
+            ) : (
+              <AddUser userId={currentUser} friendId={id} />
+            )}
           </div>
         </div>
       </section>

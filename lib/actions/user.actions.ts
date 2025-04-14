@@ -125,6 +125,22 @@ export async function addFriend(userId: string, friendId: string) {
   }
 }
 
+export async function checkIfFriend(userId: string, friendId: string) {
+  try {
+    const user = await db.user.findUnique({
+      where: { id: userId },
+      include: { friends: true },
+    });
+
+    if (!user) return false;
+
+    return user.friends.some((friend) => friend.id === friendId);
+  } catch (error) {
+    console.error('Error checking friendship:', error);
+    return false;
+  }
+}
+
 export async function getFriends(userId: string) {
   try {
     const user = await db.user.findUnique({
