@@ -1,9 +1,7 @@
 import { Event } from '@/lib/types/index';
 import EventCard from '@/components/shared/events/event-card';
-import { getAllUserEvents } from '@/lib/actions/event.actions';
 
-const EventTimeline = async ({events}: {events: Event[]}) => {
-
+const EventTimeline = ({ events = [] }: { events?: Event[] }) => {
   return (
     <>
       <div className="max-w-screen-sm mx-auto p-6">
@@ -14,7 +12,7 @@ const EventTimeline = async ({events}: {events: Event[]}) => {
             <div className="text-center text-gray-500">No events found.</div>
           ) : (
             events.map((event: Event) => (
-              <EventCard key={event.name} event={event} />
+              <EventCard key={event.id} event={event} />
             ))
           )}
         </div>

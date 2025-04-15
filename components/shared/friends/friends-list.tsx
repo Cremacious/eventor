@@ -5,9 +5,13 @@ const FriendsList = async () => {
   const friends = await getFriends(userId);
   if (!friends) return <div>No friends found</div>;
 
-  return <>{friends.map((friend) => (
-    <div>{friend.displayName}</div>
-  ))}</>;
+  return (
+    <>
+      {friends.map((friend) => (
+        <div key={friend.id}>{friend.displayName}</div>
+      ))}
+    </>
+  );
 };
 
 export default FriendsList;
