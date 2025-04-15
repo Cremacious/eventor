@@ -1,40 +1,33 @@
 import { SidebarMenu, SidebarMenuItem } from '@/components/ui/sidebar';
-import { auth, currentUser } from '@clerk/nextjs/server';
-import { checkUser, getUserDisplayName } from '@/lib/actions/user.actions';
+import { getUserDisplayName } from '@/lib/actions/user.actions';
 
 import Link from 'next/link';
 import { Settings } from 'lucide-react';
 import { UserButton } from '@clerk/nextjs';
-import { redirect } from 'next/navigation';
 
 const SidebarUser = async () => {
   const displayName = await getUserDisplayName();
 
-
   return (
-    <SidebarMenu
-      className="backgroundCyan
- rounded-xl p-2"
-    >
-      <SidebarMenuItem>
-        <div className=" flex flex-row">
-          <UserButton />
-          <div className="ml-2 grid flex-1 text-left text-sm text-slate-800">
-            <span className="truncate font-medium">
-              {displayName}
-            </span>
-            {/* <span className="truncate text-sm">{session?.email}</span> */}
-          </div>
-          <Link
-            href="/dashboard/settings"
-            className=" cursor-pointer hover:scale-105 transition-transform bg-slate-800 justify-center rounded-full p-2 "
-          >
-            {' '}
-            <Settings className="textCyan" />
-          </Link>
+    <>
+      <Link className="hover:backgroundGray" href="/dashboard/settings">
+        <div className="text-lg ml-2 flex flex-row">
+          <Settings className="textCyan mr-2 mt-[3px]" />
+          <div>Settings</div>
         </div>
-      </SidebarMenuItem>
-    </SidebarMenu>
+      </Link>
+      <SidebarMenu
+        className="backgroundCyan
+ rounded-xl p-2"
+      >
+        <SidebarMenuItem>
+          <div className=" flex flex-row items-center">
+            <UserButton />
+            <div className="ml-4 text-md text-slate-800">{displayName}</div>
+          </div>
+        </SidebarMenuItem>
+      </SidebarMenu>
+    </>
   );
 };
 

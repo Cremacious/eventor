@@ -1,12 +1,5 @@
-import { UserProfile, SignOutButton } from '@clerk/nextjs';
-
 const SettingsPage = () => {
-  return (
-    <>
-      <SignOutButton />
-      {/* <UserProfile /> */}
-    </>
-  );
+  return <>Settings</>;
 };
 
 export default SettingsPage;

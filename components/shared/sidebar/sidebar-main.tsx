@@ -20,7 +20,13 @@ const SidebarMain = () => {
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
           <SidebarMenuItem className="flex items-center gap-2">
-            <SidebarMenuButton></SidebarMenuButton>
+            <SidebarMenuButton>
+              <Link className="w-full" href="/dashboard/create-event">
+                <div className="backgroundCyan w-full p-2 rounded-lg text-center text-slate-800">
+                  Create Event
+                </div>
+              </Link>
+            </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
         <SidebarMenu>
@@ -67,7 +73,7 @@ const SidebarMain = () => {
               </Link>
             </SidebarMenuItem>
           </div>
-          <div className="md:hidden">
+          {/* <div className="md:hidden">
             <SidebarMenuItem>
               <Link href="/dashboard/create-event">
                 <SidebarMenuButton onClick={toggleSidebar} tooltip="">
@@ -88,7 +94,7 @@ const SidebarMain = () => {
                 </SidebarMenuButton>
               </Link>
             </SidebarMenuItem>
-          </div>
+          </div> */}
           <div className="md:hidden">
             <SidebarMenuItem>
               <Link href="/dashboard/friends">
