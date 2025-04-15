@@ -1,5 +1,6 @@
 import { formatDate, formatVisibility } from '@/lib/utils';
 
+import { Profile } from '@/lib/types';
 import { getEventById } from '@/lib/actions/event.actions';
 
 const EventDetailsPAge = async (props: { params: Promise<{ id: string }> }) => {
@@ -55,6 +56,12 @@ const EventDetailsPAge = async (props: { params: Promise<{ id: string }> }) => {
               <span className="textCyan">Guests</span>
               <span className="ml-auto text-white">
                 {/* {event.guests.map((guest) => <div key={guest.id}>{guest.displayName}</div>)}   */}
+                {event.guests.length} Guests
+                {event.guests.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    
+                  </div>
+                )}
               </span>
             </div>
             <div className="flex">

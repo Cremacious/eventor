@@ -17,17 +17,17 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { CalendarIcon } from 'lucide-react';
+import Image from 'next/image';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { createEvent } from '@/lib/actions/event.actions';
 import { format } from 'date-fns';
 import { friendSchema } from '@/lib/validators';
+import image from '@/public/images/stock.jpg';
 import { insertEventSchema } from '@/lib/validators';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import image from '@/public/images/stock.jpg';
-import Image from 'next/image';
 
 const CreateEventForm = ({
   friends,
@@ -73,9 +73,7 @@ const CreateEventForm = ({
       <form
         className="space-y-4"
         method="Post"
-        onSubmit={form.handleSubmit(onSubmit, (errors) => {
-          console.log('Validation errors:', errors); // Debugging log
-        })}
+        onSubmit={form.handleSubmit(onSubmit)}
       >
         <div className="flex flex-col md:flex-row gap-4 justify-center">
           <Input
@@ -148,31 +146,47 @@ const CreateEventForm = ({
           {...form.register('description')}
           className="w-full"
         />
-
         <div className="mt-8 border-t-2 border-cyan-300">
           <h3 className="text-lg font-medium text-center mt-4">
             Invite Friends
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4 p-8">
+          <div className="flex flex-row gap-4 justify-center overflow-x-auto mt-4 p-2">
             {friends.map((friend) => (
               <div
                 key={friend.id}
-                className="backgroundCyan rounded-2xl shadow-2xl p-2 flex flex-col space-y-2"
+                className="flex-shrink-0  backgroundCyan p-4 rounded-2xl shadow-2xl items-center flex-row sm:flex-row sm:items-center gap-3 sm:gap-4"
               >
-                <Image src={image} alt="logo" height={20} width={20} />
-
-                <label
-                  htmlFor={`friend-${friend.id}`}
-                  className="text-md text-center"
-                >
-                  {friend.displayName || friend.name || 'Unnamed Friend'}
-                </label>
-                <input
-                  type="checkbox"
-                  id={`friend-${friend.id}`}
-                  checked={form.watch('guests')?.includes(friend.id) || false}
-                  onChange={() => toggleGuest(friend.id)}
+                <Image
+                  className="rounded-lg size-20"
+                  src={image}
+                  alt="Avatar"
+                  height={70}
+                  width={80}
                 />
+                <div>
+                  <div>
+                    <h3 className="font-medium text-center text-slate-800">
+                      {friend.displayName || friend.name}
+                    </h3>
+                  </div>
+                  <div className="flex justify-center gap-2 mt-2">
+                    <Button
+                      className="backgroundGray text-white"
+                      onClick={() => toggleGuest(friend.id)}
+                    >
+                      Invite{' '}
+                      <input
+                        type="checkbox"
+                        id={`friend-${friend.id}`}
+                        checked={
+                          form.watch('guests')?.includes(friend.id) || false
+                        }
+                        onChange={() => toggleGuest(friend.id)}
+                        className="pointer-events-none"
+                      />
+                    </Button>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
