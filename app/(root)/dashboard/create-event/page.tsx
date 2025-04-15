@@ -7,9 +7,9 @@ const CreateEventPage = async () => {
   const friends = await getFriends(userId);
 
   return (
-    <>
+    <div className="p-8">
       <CreateEventForm friends={friends} />
-    </>
+    </div>
   );
 };
 
