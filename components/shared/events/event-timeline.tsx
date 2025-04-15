@@ -2,8 +2,7 @@ import { Event } from '@/lib/types/index';
 import EventCard from '@/components/shared/events/event-card';
 import { getAllUserEvents } from '@/lib/actions/event.actions';
 
-const EventTimeline = async () => {
-  const events = await getAllUserEvents();
+const EventTimeline = async ({events}: {events: Event[]}) => {
 
   return (
     <>

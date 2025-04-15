@@ -72,13 +72,55 @@ export async function getAllUserEvents() {
 
 export async function getEventById(eventId: string) {
   try {
-  const event = db.event.findUnique({
-    where: {
-      id: eventId,
+    const event = db.event.findUnique({
+      where: {
+        id: eventId,
+      },
+    });
+    return event;
+  } catch (error) {}
+}
+
+export async function getUserAndFriendEvents() {
+  try {
+    const session = await auth();
+    if (!session) {
+      throw new Error('User not authenticated');
     }
-  })
-  return event
+    const userId = session?.userId;
+
+    const dbUser = await db.user.findUnique({
+      where: {
+        clerkUserId: userId ?? undefined,
+      },
+      include: {
+        friends: true, // Assuming a `friends` relation exists
+      },
+    });
+
+    if (!dbUser) {
+      throw new Error('User not found in the database.');
+    }
+
+    const userEvents = await db.event.findMany({
+      where: {
+        userId: dbUser.clerkUserId,
+      },
+    });
+
+    const friendEvents = await db.event.findMany({
+      where: {
+        userId: {
+          in: dbUser.friends.map((friend) => friend.clerkUserId),
+        },
+        visibility: {
+          in: ['public', 'friends-only'],
+        },
+      },
+    });
+
+    return [...userEvents, ...friendEvents];
   } catch (error) {
-    
+    return [];
   }
 }
