@@ -25,3 +25,7 @@ export const friendSchema = z.object({
   updatedAt: z.date(), // Date object
   displayName: z.string().nullable(), // Allows null or string
 });
+
+export const searchFriendSchema = z.object({
+  email: z.string().email({ message: 'Invalid email address' }),
+});

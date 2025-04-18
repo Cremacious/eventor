@@ -19,6 +19,9 @@ model User {
   events      Event[]
   friends     User[]   @relation("UserFriends")
   friendOf    User[]   @relation("UserFriends")
+  messages    Message[] // Relation to messages
+  sentRequests FriendRequest[] @relation("SentRequests")
+  receivedRequests FriendRequest[] @relation("ReceivedRequests")
 }
 
 model Event {
@@ -38,3 +41,22 @@ model Event {
   @@index([userId])
 }
 
+model Message {
+  id        String   @id @default(uuid())
+  subject   String
+  content   String
+  status    String   @default("unread") // "read" or "unread"
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model FriendRequest {
+  id        String   @id @default(uuid())
+  senderId  String
+  receiverId String
+  status    String   @default("pending") // "pending", "accepted", "rejected"
+  sender    User     @relation("SentRequests", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver  User     @relation("ReceivedRequests", fields: [receiverId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}

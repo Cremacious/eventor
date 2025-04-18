@@ -10,7 +10,6 @@ import {
 
 import { LayoutDashboard } from 'lucide-react';
 import Link from 'next/link';
-
 import { useSidebar } from '@/components/ui/sidebar';
 
 const SidebarMain = () => {
@@ -73,12 +72,12 @@ const SidebarMain = () => {
               </Link>
             </SidebarMenuItem>
           </div>
-          {/* <div className="md:hidden">
+          <div className="md:hidden">
             <SidebarMenuItem>
-              <Link href="/dashboard/create-event">
+              <Link href="/dashboard/inbox">
                 <SidebarMenuButton onClick={toggleSidebar} tooltip="">
                   <LayoutDashboard className="text-sidebar-foreground/70" />
-                  <span>Create Event</span>
+                  <span>Inbox</span>
                 </SidebarMenuButton>
               </Link>
             </SidebarMenuItem>
@@ -87,14 +86,14 @@ const SidebarMain = () => {
 
           <div className="hidden md:block">
             <SidebarMenuItem>
-              <Link href="/dashboard/create-event">
+              <Link href="/dashboard/inbox">
                 <SidebarMenuButton tooltip="">
                   <LayoutDashboard className="text-sidebar-foreground/70" />
-                  <span>Create Event</span>
+                  <span>Inbox</span>
                 </SidebarMenuButton>
               </Link>
             </SidebarMenuItem>
-          </div> */}
+          </div>
           <div className="md:hidden">
             <SidebarMenuItem>
               <Link href="/dashboard/friends">
