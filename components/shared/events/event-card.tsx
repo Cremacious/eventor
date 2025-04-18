@@ -3,6 +3,8 @@ import { Calendar } from 'lucide-react';
 import { Event } from '@/lib/types/index';
 import Image from 'next/image';
 import Link from 'next/link';
+import { format } from 'path';
+import { formatVisibility } from '@/lib/utils';
 import image from '@/public/images/stock.jpg';
 
 const EventCard = ({ event }: { event: Event }) => {
@@ -27,7 +29,16 @@ const EventCard = ({ event }: { event: Event }) => {
           </p>
           <div className="flex flex-wrap gap-2">
             <Badge variant="secondary" className="rounded-full">
-              tch
+              {event.type}
+            </Badge>
+            <Badge variant="secondary" className="rounded-full">
+              {event.location}
+            </Badge>
+            <Badge variant="secondary" className="rounded-full">
+              {formatVisibility(event.visibility)}
+            </Badge>
+            <Badge variant="secondary" className="rounded-full">
+              Guests: {event.guests?.length}
             </Badge>
           </div>
         </div>
